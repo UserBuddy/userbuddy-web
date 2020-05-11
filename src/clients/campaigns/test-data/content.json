@@ -1,0 +1,152 @@
+{
+  "id": "CONTENT-CAMPAIGN-UUID",
+  "name": "Usability Study Invitation",
+  "createdAt": "TIMESTAMP",
+  "editedAt": "TIMESTAMP",
+  "orgEditable": false,
+  "responseRequired": false,
+  "type": "Content",
+  "startDate": null,
+  "endDate": null,
+  "maxParticipants": null,
+  "priority": 3,
+  "repeating": false,
+  "triggers": [
+    {
+      "id": "TRIGGER-ID",
+      "criteria": [
+        {
+          "description": "Last Participation in Campaign",
+          "dataType": "Number",
+          "query": {
+            "type": "count",
+            "object": "event",
+            "select": [
+              "$timestamp"
+            ],
+            "sort": {
+              "dataType": "DateTime",
+              "field": "$timestamp",
+              "ascending": false
+            },
+            "where": [
+              {
+                "field": "$appUserId",
+                "value": "SOME_APP_USER_ID",
+                "operator": "Is"
+              },
+              {
+                "field": "params.$campaignId",
+                "value": "THIS_CAMPAIGN_ID",
+                "operator": "Is"
+              },
+              {
+                "field": "$timestamp",
+                "value": "CURRENT_TIMESTAMP",
+                "operator": "IsGreaterThan",
+                "interval": {
+                  "value": 30,
+                  "timeUnit": "Days",
+                  "addToValue": false
+                }
+              }
+            ]
+          },
+          "value": "query.count",
+          "operator": "Is",
+          "compareTo": 0
+        },
+        {
+          "description": "Last Participation in Campaign",
+          "dataType": "Number",
+          "query": {
+            "type": "count",
+            "object": "event",
+            "select": [
+              "$timestamp"
+            ],
+            "sort": {
+              "dataType": "DateTime",
+              "field": "$timestamp",
+              "ascending": false
+            },
+            "where": [
+              {
+                "field": "$appUserId",
+                "value": "SOME_APP_USER_ID",
+                "operator": "Is"
+              },
+              {
+                "field": "params.$campaignId",
+                "value": "OTHER_CAMPAIGN_ID",
+                "operator": "Is"
+              },
+              {
+                "field": "$timestamp",
+                "value": "CURRENT_TIMESTAMP",
+                "operator": "IsGreaterThan",
+                "interval": {
+                  "value": 1,
+                  "timeUnit": "Days",
+                  "addToValue": false
+                }
+              }
+            ]
+          },
+          "value": "query.count",
+          "operator": "Is",
+          "compareTo": 0
+        },
+        {
+          "description": "Latest Survey Question Response",
+          "dataType": "Boolean",
+          "query": {
+            "type": "first",
+            "object": "event",
+            "select": [
+              "$timestamp",
+              "params.$value"
+            ],
+            "sort": {
+              "dataType": "DateTime",
+              "field": "$timestamp",
+              "ascending": false
+            },
+            "where": [
+              {
+                "field": "$appUserId",
+                "value": "SOME_APP_USER_ID",
+                "operator": "Is"
+              },
+              {
+                "field": "params.$campaignId",
+                "value": "SOME_CAMPAIGN_ID",
+                "operator": "Is"
+              }
+            ]
+          },
+          "value": "query.params.$value",
+          "operator": "Is",
+          "compareTo": true
+        }
+      ]
+    }
+  ],
+  "display": {
+    "type": "Popup",
+    "automatic": false,
+    "delay": 0
+  },
+  "typeData": {
+    "content": {
+      "type": "Link",
+      "title": "Help us improve Userbuddy while earning a $20 Amazon gift card!",
+      "subtitle": "Participate in a 15-minute study with our product team and earn a $20 Amazon gift card!",
+      "ctaText": "Schedule Now",
+      "dismissText": "No Thanks",
+      "linkUrl": "https://calendly.com/studiobliss/30min",
+      "required": false,
+      "useInvertedTheme": true
+    }
+  }
+}

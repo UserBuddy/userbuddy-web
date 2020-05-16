@@ -33,6 +33,7 @@ export default class UBEvents {
   }
 
   _complete({campaign}) {
+    CampaignViewManager.isCampaignActivelyDisplayed = false;
     Userbuddy.events.track({
       name: '$CampaignParticipation',
       properties: {
@@ -41,10 +42,10 @@ export default class UBEvents {
       },
     });
     this._remove({campaign});
-    this._maybeDisplayNext();
   }
 
   _dismiss({campaign}) {
+    CampaignViewManager.isCampaignActivelyDisplayed = false;
     Userbuddy.events.track({
       name: '$CampaignParticipation',
       params: {

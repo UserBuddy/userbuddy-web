@@ -1,6 +1,7 @@
 
 import Userbuddy from '../../userbuddy';
 import Survey from '../../views/campaigns/survey/survey';
+import Review from '../../views/campaigns/review/review';
 
 export default class CampaignViewManager {
   static get campaigns() {
@@ -61,7 +62,8 @@ export default class CampaignViewManager {
   }
 
   static _displayReview({ campaign }) {
-    
+    const review = new Review({ campaign, });
+    document.body.appendChild(review.node);
   }
 
   static _displayContent({ campaign }) {

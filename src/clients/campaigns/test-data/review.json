@@ -134,7 +134,7 @@
   ],
   "display": {
     "type": "Popup",
-    "automatic": false,
+    "automatic": true,
     "delay": 1000
   },
   "typeData": {

@@ -2,12 +2,14 @@ import platform from 'platform';
 import axios from 'axios';
 import pjson from '../../package.json';
 import getIPAddress from '../helpers/get-ip';
+import getDeviceId from '../helpers/device-id';
 
 export default class UBService {
   constructor({
     apiKey,
     appVersion,
   }) {
+    console.log(getDeviceId());
     this._client = axios.create({
       baseURL: 'http://localhost:3005/public',
       headers: {
@@ -23,7 +25,7 @@ export default class UBService {
         deviceType: platform.product,
         ipAddress: '',
         // TODO: real device id
-        deviceId: "TEST_DEVICE_ID"
+        deviceId: getDeviceId(),
       },
     });
 
@@ -31,8 +33,8 @@ export default class UBService {
     getIPAddress((ip) => {
       this._client.interceptors.request.use(
         (config) => {
-          config.headers['ipAddress'] = 'application/json';
-          return ip;
+          config.headers['ipAddress'] = ip;
+          return config;
         },
         (error) => {
           Promise.reject(error);

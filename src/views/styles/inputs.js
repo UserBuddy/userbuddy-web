@@ -13,6 +13,7 @@ export const textAreaInput = `
   color: black;
   border: 1px solid transparent;
   height: 80px;
+  font-family: Avenir, Helvetica, Arial, sans-serif !important;
 `
 
 export const textAreaFocus = `
